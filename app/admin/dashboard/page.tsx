@@ -12,14 +12,19 @@ import {
   Trash2,
   CheckCircle2,
   AlertCircle,
-  Loader2
+  Loader2,
+  QrCode,
+  X
 } from "lucide-react";
+import { QRCodeSVG } from "qrcode.react";
 
 export default function AdminDashboard() {
   const [slug, setSlug] = useState("");
   const [nfcCode, setNfcCode] = useState("");
   const [category, setCategory] = useState("");
   const [bracelets, setBracelets] = useState<any[]>([]);
+  const [selectedBracelet, setSelectedBracelet] = useState<any | null>(null);
+  const [isQRModalOpen, setIsQRModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isUploading, setIsUploading] = useState(false);
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
@@ -255,9 +260,21 @@ export default function AdminDashboard() {
                             {new Date(b.createdAt).toLocaleDateString()}
                           </td>
                           <td className="px-6 py-4 text-right">
-                            <button className="text-muted-foreground hover:text-red-600 transition-colors">
-                              <Trash2 className="w-4 h-4" />
-                            </button>
+                            <div className="flex items-center justify-end gap-2">
+                              <button
+                                onClick={() => {
+                                  setSelectedBracelet(b);
+                                  setIsQRModalOpen(true);
+                                }}
+                                className="p-2 text-muted-foreground hover:text-primary hover:bg-primary/10 rounded-lg transition-colors"
+                                title="Show QR Code"
+                              >
+                                <QrCode className="w-4 h-4" />
+                              </button>
+                              <button className="p-2 text-muted-foreground hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors">
+                                <Trash2 className="w-4 h-4" />
+                              </button>
+                            </div>
                           </td>
                         </tr>
                       ))
@@ -269,6 +286,48 @@ export default function AdminDashboard() {
           </div>
         </div>
       </div>
+
+      {/* QR Code Modal */}
+      {isQRModalOpen && selectedBracelet && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div
+            className="absolute inset-0 bg-black/40 backdrop-blur-sm animate-in fade-in duration-200"
+            onClick={() => setIsQRModalOpen(false)}
+          />
+          <div className="bg-white rounded-3xl shadow-2xl w-full max-w-sm relative z-10 overflow-hidden animate-in zoom-in-95 duration-200">
+            <div className="p-6 border-b border-border flex items-center justify-between">
+              <h3 className="font-bold text-lg">Bracelet QR Code</h3>
+              <button
+                onClick={() => setIsQRModalOpen(false)}
+                className="p-1 hover:bg-muted rounded-full transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            <div className="p-8 flex flex-col items-center gap-6">
+              <div className="p-4 bg-white rounded-2xl border-2 border-border shadow-inner">
+                <QRCodeSVG
+                  value={`${window.location.origin}/scan/${selectedBracelet.nfcCode}`}
+                  size={200}
+                  level="H"
+                  includeMargin={true}
+                />
+              </div>
+              <div className="text-center">
+                {/* <p className="text-sm font-semibold mb-1">{selectedBracelet.slug}</p>
+                <p className="text-xs text-muted-foreground font-mono">{selectedBracelet.nfcCode}</p> */}
+                <p className="text-xs mt-4 text-primary font-medium">Scan to view Bible verse</p>
+              </div>
+              <button
+                onClick={() => window.print()}
+                className="w-full bg-[#1A1C21] text-white py-2.5 rounded-xl font-semibold hover:bg-black transition-colors"
+              >
+                Print QR Code
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
