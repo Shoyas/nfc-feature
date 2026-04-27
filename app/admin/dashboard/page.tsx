@@ -1,13 +1,15 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable react-hooks/immutability */
 "use client";
 
 import { useState, useEffect } from "react";
-import { 
-  Plus, 
-  Upload, 
-  Tag, 
-  BookOpen, 
-  BarChart3, 
-  Trash2, 
+import {
+  Plus,
+  Upload,
+  Tag,
+  BookOpen,
+  BarChart3,
+  Trash2,
   CheckCircle2,
   AlertCircle,
   Loader2
@@ -97,11 +99,10 @@ export default function AdminDashboard() {
             <h1 className="text-3xl font-bold font-heading">Admin Dashboard</h1>
             <p className="text-muted-foreground">Manage your NFC bracelets and Bible verses.</p>
           </div>
-          
+
           {message && (
-            <div className={`flex items-center gap-2 px-4 py-2 rounded-lg border animate-in fade-in slide-in-from-top-2 ${
-              message.type === "success" ? "bg-green-50 border-green-200 text-green-700" : "bg-red-50 border-red-200 text-red-700"
-            }`}>
+            <div className={`flex items-center gap-2 px-4 py-2 rounded-lg border animate-in fade-in slide-in-from-top-2 ${message.type === "success" ? "bg-green-50 border-green-200 text-green-700" : "bg-red-50 border-red-200 text-red-700"
+              }`}>
               {message.type === "success" ? <CheckCircle2 className="w-4 h-4" /> : <AlertCircle className="w-4 h-4" />}
               <span className="text-sm font-medium">{message.text}</span>
             </div>
@@ -150,7 +151,7 @@ export default function AdminDashboard() {
                     <option value="Strength">Strength</option>
                   </select>
                 </div>
-                <button 
+                <button
                   type="submit"
                   className="w-full bg-primary text-primary-foreground py-2.5 rounded-xl font-semibold hover:opacity-90 transition-opacity active:scale-[0.98]"
                 >
@@ -166,13 +167,13 @@ export default function AdminDashboard() {
                 <h2 className="text-lg font-semibold">Bulk Upload Verses</h2>
               </div>
               <p className="text-xs text-muted-foreground mb-4 italic">
-                Upload a CSV with "text" and "category" columns.
+                Upload a CSV with &quot;text&quot; and &quot;category&quot; columns.
               </p>
               <form onSubmit={handleUpload} className="space-y-4">
                 <div className="border-2 border-dashed border-border rounded-xl p-4 text-center hover:border-primary/50 transition-colors cursor-pointer relative">
-                  <input 
-                    type="file" 
-                    name="file" 
+                  <input
+                    type="file"
+                    name="file"
                     accept=".csv"
                     className="absolute inset-0 opacity-0 cursor-pointer"
                     required
@@ -182,7 +183,7 @@ export default function AdminDashboard() {
                     <span className="text-sm text-muted-foreground">Click to browse or drag CSV</span>
                   </div>
                 </div>
-                <button 
+                <button
                   type="submit"
                   disabled={isUploading}
                   className="w-full bg-[#1A1C21] text-white py-2.5 rounded-xl font-semibold hover:bg-black transition-colors flex items-center justify-center gap-2"
@@ -203,7 +204,7 @@ export default function AdminDashboard() {
                   Refresh List
                 </button>
               </div>
-              
+
               <div className="overflow-x-auto">
                 <table className="w-full text-left">
                   <thead>

@@ -1,4 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable react-hooks/purity */
+
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import VerseCard from "@/components/verse-card";
@@ -15,7 +16,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
       <div className="flex h-screen items-center justify-center bg-background p-6">
         <div className="glass p-8 rounded-3xl text-center max-w-sm w-full">
           <h1 className="text-2xl font-bold mb-4">Bracelet Not Found</h1>
-          <p className="text-muted-foreground mb-6">This bracelet hasn't been activated yet.</p>
+          <p className="text-muted-foreground mb-6">This bracelet hasn`&apos;`t been activated yet.</p>
           <Link href="/" className="inline-block bg-primary text-primary-foreground px-6 py-2 rounded-full font-medium">
             Go Home
           </Link>
@@ -28,8 +29,8 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
     where: { category: bracelet.category }
   });
 
-  const randomVerse = verses.length > 0 
-    ? verses[Math.floor(Math.random() * verses.length)] 
+  const randomVerse = verses.length > 0
+    ? verses[Math.floor(Math.random() * verses.length)]
     : { text: "No verses found for this category.", category: bracelet.category };
 
   return (
