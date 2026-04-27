@@ -17,6 +17,7 @@ import {
 
 export default function AdminDashboard() {
   const [slug, setSlug] = useState("");
+  const [nfcCode, setNfcCode] = useState("");
   const [category, setCategory] = useState("");
   const [bracelets, setBracelets] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -42,18 +43,19 @@ export default function AdminDashboard() {
 
   const createBracelet = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!slug || !category) return;
+    if (!slug || !nfcCode || !category) return;
 
     try {
       const res = await fetch("/api/bracelet", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ slug, category }),
+        body: JSON.stringify({ slug, nfcCode, category }),
       });
 
       if (res.ok) {
         setMessage({ type: "success", text: "Bracelet created successfully!" });
         setSlug("");
+        setNfcCode("");
         setCategory("");
         fetchBracelets();
       } else {
@@ -137,6 +139,16 @@ export default function AdminDashboard() {
                   />
                 </div>
                 <div>
+                  <label className="text-sm font-medium mb-1.5 block">NFC Hardware Code</label>
+                  <input
+                    value={nfcCode}
+                    onChange={(e) => setNfcCode(e.target.value)}
+                    placeholder="e.g. NFC-882211"
+                    className="w-full px-4 py-2 rounded-xl border border-border focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
+                    required
+                  />
+                </div>
+                <div>
                   <label className="text-sm font-medium mb-1.5 block">Category</label>
                   <select
                     value={category}
@@ -210,6 +222,7 @@ export default function AdminDashboard() {
                   <thead>
                     <tr className="bg-muted/30 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                       <th className="px-6 py-4">Slug</th>
+                      <th className="px-6 py-4">NFC Code</th>
                       <th className="px-6 py-4">Category</th>
                       <th className="px-6 py-4">Created At</th>
                       <th className="px-6 py-4 text-right">Actions</th>
@@ -218,13 +231,13 @@ export default function AdminDashboard() {
                   <tbody className="divide-y divide-border">
                     {isLoading ? (
                       <tr>
-                        <td colSpan={4} className="px-6 py-10 text-center">
+                        <td colSpan={5} className="px-6 py-10 text-center">
                           <Loader2 className="w-6 h-6 animate-spin mx-auto text-muted-foreground" />
                         </td>
                       </tr>
                     ) : bracelets.length === 0 ? (
                       <tr>
-                        <td colSpan={4} className="px-6 py-10 text-center text-muted-foreground">
+                        <td colSpan={5} className="px-6 py-10 text-center text-muted-foreground">
                           No bracelets found. Create your first one!
                         </td>
                       </tr>
@@ -232,6 +245,7 @@ export default function AdminDashboard() {
                       bracelets.map((b) => (
                         <tr key={b.id} className="hover:bg-muted/10 transition-colors">
                           <td className="px-6 py-4 font-mono text-sm">{b.slug}</td>
+                          <td className="px-6 py-4 font-mono text-xs text-muted-foreground">{b.nfcCode}</td>
                           <td className="px-6 py-4">
                             <span className="px-2.5 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary">
                               {b.category}

@@ -15,14 +15,14 @@ export async function GET() {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { slug, category } = body;
+    const { slug, nfcCode, category } = body;
 
-    if (!slug || !category) {
-      return NextResponse.json({ error: "Slug and Category are required" }, { status: 400 });
+    if (!slug || !nfcCode || !category) {
+      return NextResponse.json({ error: "Slug, NFC Code, and Category are required" }, { status: 400 });
     }
 
     const bracelet = await prisma.bracelet.create({
-      data: { slug, category },
+      data: { slug, nfcCode, category },
     });
 
     return NextResponse.json(bracelet);
@@ -30,3 +30,4 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Failed to create bracelet" }, { status: 500 });
   }
 }
+ 

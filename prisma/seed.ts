@@ -35,6 +35,7 @@ async function main() {
     update: {},
     create: {
       slug: "test-bracelet",
+      nfcCode: "test-code",
       category: "Peace",
     },
   });

@@ -27,6 +27,7 @@ export type AggregateBracelet = {
 export type BraceletMinAggregateOutputType = {
   id: string | null
   slug: string | null
+  nfcCode: string | null
   category: string | null
   createdAt: Date | null
 }
@@ -34,6 +35,7 @@ export type BraceletMinAggregateOutputType = {
 export type BraceletMaxAggregateOutputType = {
   id: string | null
   slug: string | null
+  nfcCode: string | null
   category: string | null
   createdAt: Date | null
 }
@@ -41,6 +43,7 @@ export type BraceletMaxAggregateOutputType = {
 export type BraceletCountAggregateOutputType = {
   id: number
   slug: number
+  nfcCode: number
   category: number
   createdAt: number
   _all: number
@@ -50,6 +53,7 @@ export type BraceletCountAggregateOutputType = {
 export type BraceletMinAggregateInputType = {
   id?: true
   slug?: true
+  nfcCode?: true
   category?: true
   createdAt?: true
 }
@@ -57,6 +61,7 @@ export type BraceletMinAggregateInputType = {
 export type BraceletMaxAggregateInputType = {
   id?: true
   slug?: true
+  nfcCode?: true
   category?: true
   createdAt?: true
 }
@@ -64,6 +69,7 @@ export type BraceletMaxAggregateInputType = {
 export type BraceletCountAggregateInputType = {
   id?: true
   slug?: true
+  nfcCode?: true
   category?: true
   createdAt?: true
   _all?: true
@@ -144,6 +150,7 @@ export type BraceletGroupByArgs<ExtArgs extends runtime.Types.Extensions.Interna
 export type BraceletGroupByOutputType = {
   id: string
   slug: string
+  nfcCode: string
   category: string
   createdAt: Date
   _count: BraceletCountAggregateOutputType | null
@@ -172,6 +179,7 @@ export type BraceletWhereInput = {
   NOT?: Prisma.BraceletWhereInput | Prisma.BraceletWhereInput[]
   id?: Prisma.StringFilter<"Bracelet"> | string
   slug?: Prisma.StringFilter<"Bracelet"> | string
+  nfcCode?: Prisma.StringFilter<"Bracelet"> | string
   category?: Prisma.StringFilter<"Bracelet"> | string
   createdAt?: Prisma.DateTimeFilter<"Bracelet"> | Date | string
 }
@@ -179,6 +187,7 @@ export type BraceletWhereInput = {
 export type BraceletOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   slug?: Prisma.SortOrder
+  nfcCode?: Prisma.SortOrder
   category?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
@@ -186,16 +195,18 @@ export type BraceletOrderByWithRelationInput = {
 export type BraceletWhereUniqueInput = Prisma.AtLeast<{
   id?: string
   slug?: string
+  nfcCode?: string
   AND?: Prisma.BraceletWhereInput | Prisma.BraceletWhereInput[]
   OR?: Prisma.BraceletWhereInput[]
   NOT?: Prisma.BraceletWhereInput | Prisma.BraceletWhereInput[]
   category?: Prisma.StringFilter<"Bracelet"> | string
   createdAt?: Prisma.DateTimeFilter<"Bracelet"> | Date | string
-}, "id" | "slug">
+}, "id" | "slug" | "nfcCode">
 
 export type BraceletOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   slug?: Prisma.SortOrder
+  nfcCode?: Prisma.SortOrder
   category?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.BraceletCountOrderByAggregateInput
@@ -209,6 +220,7 @@ export type BraceletScalarWhereWithAggregatesInput = {
   NOT?: Prisma.BraceletScalarWhereWithAggregatesInput | Prisma.BraceletScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Bracelet"> | string
   slug?: Prisma.StringWithAggregatesFilter<"Bracelet"> | string
+  nfcCode?: Prisma.StringWithAggregatesFilter<"Bracelet"> | string
   category?: Prisma.StringWithAggregatesFilter<"Bracelet"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Bracelet"> | Date | string
 }
@@ -216,6 +228,7 @@ export type BraceletScalarWhereWithAggregatesInput = {
 export type BraceletCreateInput = {
   id?: string
   slug: string
+  nfcCode: string
   category: string
   createdAt?: Date | string
 }
@@ -223,6 +236,7 @@ export type BraceletCreateInput = {
 export type BraceletUncheckedCreateInput = {
   id?: string
   slug: string
+  nfcCode: string
   category: string
   createdAt?: Date | string
 }
@@ -230,6 +244,7 @@ export type BraceletUncheckedCreateInput = {
 export type BraceletUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
+  nfcCode?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -237,6 +252,7 @@ export type BraceletUpdateInput = {
 export type BraceletUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
+  nfcCode?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -244,6 +260,7 @@ export type BraceletUncheckedUpdateInput = {
 export type BraceletCreateManyInput = {
   id?: string
   slug: string
+  nfcCode: string
   category: string
   createdAt?: Date | string
 }
@@ -251,6 +268,7 @@ export type BraceletCreateManyInput = {
 export type BraceletUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
+  nfcCode?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -258,6 +276,7 @@ export type BraceletUpdateManyMutationInput = {
 export type BraceletUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
+  nfcCode?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -265,6 +284,7 @@ export type BraceletUncheckedUpdateManyInput = {
 export type BraceletCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   slug?: Prisma.SortOrder
+  nfcCode?: Prisma.SortOrder
   category?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
@@ -272,6 +292,7 @@ export type BraceletCountOrderByAggregateInput = {
 export type BraceletMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   slug?: Prisma.SortOrder
+  nfcCode?: Prisma.SortOrder
   category?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
@@ -279,6 +300,7 @@ export type BraceletMaxOrderByAggregateInput = {
 export type BraceletMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   slug?: Prisma.SortOrder
+  nfcCode?: Prisma.SortOrder
   category?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
@@ -296,6 +318,7 @@ export type DateTimeFieldUpdateOperationsInput = {
 export type BraceletSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   slug?: boolean
+  nfcCode?: boolean
   category?: boolean
   createdAt?: boolean
 }, ExtArgs["result"]["bracelet"]>
@@ -303,6 +326,7 @@ export type BraceletSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
 export type BraceletSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   slug?: boolean
+  nfcCode?: boolean
   category?: boolean
   createdAt?: boolean
 }, ExtArgs["result"]["bracelet"]>
@@ -310,6 +334,7 @@ export type BraceletSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
 export type BraceletSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   slug?: boolean
+  nfcCode?: boolean
   category?: boolean
   createdAt?: boolean
 }, ExtArgs["result"]["bracelet"]>
@@ -317,11 +342,12 @@ export type BraceletSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
 export type BraceletSelectScalar = {
   id?: boolean
   slug?: boolean
+  nfcCode?: boolean
   category?: boolean
   createdAt?: boolean
 }
 
-export type BraceletOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "slug" | "category" | "createdAt", ExtArgs["result"]["bracelet"]>
+export type BraceletOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "slug" | "nfcCode" | "category" | "createdAt", ExtArgs["result"]["bracelet"]>
 
 export type $BraceletPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Bracelet"
@@ -329,6 +355,7 @@ export type $BraceletPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     slug: string
+    nfcCode: string
     category: string
     createdAt: Date
   }, ExtArgs["result"]["bracelet"]>
@@ -756,6 +783,7 @@ export interface Prisma__BraceletClient<T, Null = never, ExtArgs extends runtime
 export interface BraceletFieldRefs {
   readonly id: Prisma.FieldRef<"Bracelet", 'String'>
   readonly slug: Prisma.FieldRef<"Bracelet", 'String'>
+  readonly nfcCode: Prisma.FieldRef<"Bracelet", 'String'>
   readonly category: Prisma.FieldRef<"Bracelet", 'String'>
   readonly createdAt: Prisma.FieldRef<"Bracelet", 'DateTime'>
 }

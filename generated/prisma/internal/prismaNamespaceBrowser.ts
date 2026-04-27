@@ -74,6 +74,7 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 export const BraceletScalarFieldEnum = {
   id: 'id',
   slug: 'slug',
+  nfcCode: 'nfcCode',
   category: 'category',
   createdAt: 'createdAt'
 } as const
