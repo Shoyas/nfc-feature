@@ -1,15 +1,16 @@
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
 }
 
-generator client {
-  provider = "prisma-client-js"
+datasource db {
+  provider = "postgresql"
 }
 
 model Bracelet {
   id        String   @id @default(uuid())
   slug      String   @unique
+  nfcCode   String   @unique
   category  String
   createdAt DateTime @default(now())
 }

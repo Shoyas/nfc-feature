@@ -1,0 +1,35 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      # Use local postgres by default if DATABASE_URL is not set in the environment or .env
+      - DATABASE_URL=${DATABASE_URL:-postgresql://postgres:password@db:5432/callman?schema=public}
+    depends_on:
+      - db
+    networks:
+      - callman-network
+
+  db:
+    image: postgres:15-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: callman
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - callman-network
+
+volumes:
+  pgdata:
+
+networks:
+  callman-network:
+    driver: bridge
