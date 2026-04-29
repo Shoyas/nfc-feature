@@ -6,6 +6,7 @@ export async function POST(req: Request) {
   const bracelet = await prisma.bracelet.create({
     data: {
       slug: body.slug,
+      nfcCode: body.nfcCode,
       category: body.category,
     },
   })
